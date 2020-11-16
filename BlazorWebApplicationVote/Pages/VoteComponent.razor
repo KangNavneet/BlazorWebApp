@@ -1,0 +1,60 @@
+﻿@page "/vote"
+<h2>Vote Component</h2>
+<h3><b>Hii @nameValue</b></h3>
+<h3 class=".text-danger"> Current count: @currentCount<br/> @message</h3>
+
+
+<form>
+    <div class="form-group">
+        <label for="name" class="col-sm-2 col-form-label">Enter Name</label><br>
+        <input type="text" class="form-control" id="name" @bind="nameValue" name="name"><br>
+
+    </div>
+    <div class="form-group">
+        <label for="vote" class="col-sm-2 col-form-label">Enter Vote</label><br>
+        <input type="number" class="form-control" id="vote" @bind="currentValue" name="vote"><br>
+
+    </div>
+
+</form>
+<button class="btn btn-primary" @onclick="VoteCount">Click me</button>
+
+@code {
+    private String currentCount = "";
+    private int currentValue;
+    public String nameValue;
+    private Boolean btnFlag = false;
+    private String message;
+
+    private void VoteCount()
+    {
+        btnFlag = true;
+
+        if(currentValue>5 )
+        {
+
+            currentCount = "You cannot enter greater than 5";
+            message = "";
+        }
+        else if(currentValue<1)
+        {
+            currentCount = "You cannot enter less than 1";
+            message = "";
+        }
+        else
+        {
+            if(btnFlag)
+            {
+                currentCount = currentValue.ToString();
+                message = "Thank you for your vote!";
+
+            }
+            else
+            {
+                currentCount = "Not Clicked Button";
+                message = "";
+            }
+
+        }
+    }
+}
